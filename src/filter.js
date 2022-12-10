@@ -1,9 +1,11 @@
-Array.prototype.map = Array.prototype.map || function (func, context) {
+Array.prototype.filter = Array.prototype.filter || function (func, context) {
   const arr = []
   if (typeof func === 'function') {
     for (let i = 0, len = this.length; i < len; i++) {
       if (Object.prototype.hasOwnProperty.call(this, i)) {
-        arr.push(func.call(context, this[i], i, this));
+        if (func.call(context, this[i], i, this)) {
+          arr.push(this[i])
+        };
       }
     }
   }
@@ -11,8 +13,6 @@ Array.prototype.map = Array.prototype.map || function (func, context) {
 }
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-const arr1 = arr.map(function (val) {
-  return val * 2
-})
+const arr1 = arr.filter(val => val > 5);
+// [6, 7, 8, 9]
 console.log(arr1)
