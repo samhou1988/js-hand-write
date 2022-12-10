@@ -1,7 +1,7 @@
 Array.prototype.filter = Array.prototype.filter || function (func, context) {
-  const arr = []
+  var arr = []
   if (typeof func === 'function') {
-    for (let i = 0, len = this.length; i < len; i++) {
+    for (var i = 0, len = this.length; i < len; i++) {
       if (Object.prototype.hasOwnProperty.call(this, i)) {
         if (func.call(context, this[i], i, this)) {
           arr.push(this[i])
