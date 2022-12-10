@@ -20,4 +20,8 @@ Array.prototype.reduce = Array.prototype.reduce || function (func, initialValue)
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const sum = arr.reduce((prev, current) => prev + current);
+// 55
 console.log(sum);
+const sum2 = arr.reduce((prev, current) => prev + current, 100);
+// 155
+console.log(sum2);
