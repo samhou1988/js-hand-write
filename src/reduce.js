@@ -9,7 +9,7 @@ Array.prototype.reduce = Array.prototype.reduce || function (func, initialValue)
 
   if (typeof func === 'function') {
     for (i; i < len; i++) {
-      if (this.hasOwnProperty(i)) {
+      if (Object.prototype.hasOwnProperty.call(this, i)) {
         previousValue = func(previousValue, this[i], i, this);
       }
     }
