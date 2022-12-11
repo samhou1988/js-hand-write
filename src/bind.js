@@ -3,10 +3,12 @@ if (!Function.prototype.bind) {
     configurable: true,
     value: function bind() {
       var restArgs = Array.prototype.slice.call(arguments)
-      var func = this;
       var context = restArgs.shift();
+      context.func = this;
       return function bound() {
-        return func.apply(context, restArgs.concat(Array.prototype.slice.call(arguments)));
+        var result = context.func.apply(context, restArgs.concat(Array.prototype.slice.call(arguments)));
+        delete context.func;
+        return result;
       };
     },
     writable: true
