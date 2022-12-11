@@ -1,7 +1,6 @@
-function create(proto) {
+function create(o) {
   function F() { };
-  F.prototype = proto;
-  F.prototype.constructor = F;
+  F.prototype = o;
 
   return new F();
 }

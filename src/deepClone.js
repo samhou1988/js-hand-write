@@ -78,29 +78,31 @@ function deepClone(source) {
 // // { a: 'a', b: [2, 3, 4], c: { d: 'name' } }
 // console.log(result);
 
-// function Animal(name) {
-//   this.name = name;
-// }
-
-// var animal = new Animal('tom');
-// var origin = {
-//   a: function () {
-//     return 'a'
-//   },
-//   b: new RegExp(/\d/g),
-//   c: animal
-// }
-// var result = JSON.parse(JSON.stringify(origin))
-// result.c.name = 'sam'
-// console.log(origin)
-// console.log(result)
-
-var origin = {
-  a: 'name'
+function Animal(name) {
+  this.name = name;
 }
 
-origin.b = origin
-
-const result = deepClone(origin)
+var animal = new Animal('tom');
+var origin = {
+  a: function () {
+    return 'a'
+  },
+  b: new RegExp(/\d/, 'igm'), // new RegExp("\\d", 'igm)
+  c: animal
+}
+// var result = JSON.parse(JSON.stringify(origin))
+var result = deepClone(origin)
+result.c.name = 'sam'
+console.log(result.a());
 console.log(origin)
-console.log(result.b.b.b.a)
+console.log(result)
+
+// var origin = {
+//   a: 'name'
+// }
+
+// origin.b = origin
+
+// const result = deepClone(origin)
+// console.log(origin)
+// console.log(result.b.b.b.a)

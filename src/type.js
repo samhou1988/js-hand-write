@@ -6,7 +6,9 @@
   })
 })(_ = {});
 
-console.log(_.isBoolean(true))
-console.log(_.isNumber(`1`))
-console.log(_.isRegExp(/test/igm))
-console.log(_.isDate(new Date('2022-02-31')))
+// console.log(_.isBoolean(true))
+// console.log(_.isNumber(`1`))
+// console.log(_.isRegExp(/test/igm))
+// console.log(_.isDate(new Date('2022-02-31')))
+
+module.exports = _;
