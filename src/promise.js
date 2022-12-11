@@ -147,4 +147,85 @@ Promise.defer = Promise.deferred = function () {
   });
   return dfd;
 }
+
+Promise.resolve = function (value) {
+  // 如果是 Promsie，则直接输出它
+  if (value instanceof Promise) {
+    return value
+  }
+  return new Promise(resolve => resolve(value))
+}
+Promise.reject = function (reason) {
+  return new Promise((resolve, reject) => reject(reason))
+}
+Promise.all = function (promiseArr) {
+  let index = 0, result = []
+  return new Promise((resolve, reject) => {
+    promiseArr.forEach((p, i) => {
+      Promise.resolve(p).then(val => {
+        index++
+        result[i] = val
+        if (index === promiseArr.length) {
+          resolve(result)
+        }
+      }, err => {
+        reject(err)
+      })
+    })
+  })
+}
+Promise.race = function (promiseArr) {
+  return new Promise((resolve, reject) => {
+    promiseArr.forEach(p => {
+      Promise.resolve(p).then(val => {
+        resolve(val)
+      }, err => {
+        rejecte(err)
+      })
+    })
+  })
+}
+Promise.allSettled = function (promiseArr) {
+  let result = []
+
+  return new Promise((resolve, reject) => {
+    promiseArr.forEach((p, i) => {
+      Promise.resolve(p).then(val => {
+        result.push({
+          status: 'fulfilled',
+          value: val
+        })
+        if (result.length === promiseArr.length) {
+          resolve(result)
+        }
+      }, err => {
+        result.push({
+          status: 'rejected',
+          reason: err
+        })
+        if (result.length === promiseArr.length) {
+          resolve(result)
+        }
+      })
+    })
+  })
+}
+
+Promise.any = function (promiseArr) {
+  let index = 0
+  return new Promise((resolve, reject) => {
+    if (promiseArr.length === 0) return
+    promiseArr.forEach((p, i) => {
+      Promise.resolve(p).then(val => {
+        resolve(val)
+
+      }, err => {
+        index++
+        if (index === promiseArr.length) {
+          reject(new AggregateError('All promises were rejected'))
+        }
+      })
+    })
+  })
+}
 module.exports = Promise;
