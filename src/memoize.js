@@ -27,9 +27,12 @@ const fibonacci = memoize(function (n) {
   return (n <= 2) ? 1 : fibonacci(n - 2) + fibonacci(n - 1)
 });
 
+// fibonacci: 38.434s
 console.time('fibonacci')
-console.log(fibonacci1(40))
+console.log(fibonacci1(48))
 console.timeEnd('fibonacci')
+
+// memoizeFibonacci: 0.189ms
 console.time('memoizeFibonacci')
-console.log(fibonacci(40))
+console.log(fibonacci(48))
 console.timeEnd('memoizeFibonacci')
