@@ -1,10 +1,9 @@
 function throttle(callback, delay = 300) {
-  var timer = null;
-  return function () {
-    var self = this;
+  let timer = null;
+  return function (...args) {
     if (!timer) {
-      timer = setTimeout(function () {
-        callback.apply(self, arguments);
+      timer = setTimeout(() => {
+        callback.apply(this, args);
         clearTimeout(timer);
       }, delay);
     }
